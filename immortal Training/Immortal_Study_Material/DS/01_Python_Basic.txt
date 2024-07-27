@@ -1,0 +1,79 @@
+PYTHON
+user-friendly programming language.
+Known for its simplicity and readability
+Easy for beginners.
+
+
+
+What is Google Colab?
+Cloud-based Python Environment
+an online platform that allows you to write and execute Python code in a Jupyter notebook environment.
+Free with Google Account
+It's convenient
+No local installations.
+Real-time Collaboration
+Easy Sharing and Saving
+Rich Text Formatting
+
+
+2. Variables
+
+variable in programming is like a container or a named storage location that holds a value.
+It's used to store information that can be accessed and manipulated throughout the program.
+
+2.1 variable naming rules:
+
+Start with a Letter or Underscore.  --- cant start with special character or number
+Avoid Special Characters.  ---start,inside avoid special char
+Case Sensitivity.              
+Don't Use Reserved Keywords.       
+Use Descriptive Names.           --- explain properly and shortly
+Use CamelCase or Snake Case.
+
+
+
+3. Data Types
+defines the type of data that a variable can hold.
+
+Integers (int)
+Floating-point numbers (float)
+Strings (str)
+Booleans (bool)
+
+# int - numbers [phone number, adhar number, pincode, 23435, 76, 787,  -7878]
+# float - decimal numbers [temperarture, weight , height, amount] 34.789, 12.903, 134.67
+# str - sequence of characters, '', ''' , [country, person name, pan card number, vehicle number plate, email] "Delhi", "vinie@example.com", "GFGFGJ%&%&^", "FGFGJ66757" , "55567567"
+#bool - True / False
+
+4. Operators
+Operators in programming are symbols that perform operations on variables or values.
+
+4.1 Arithmetic Operators:
+Addition+ : Adds values together.
+Subtraction - : Subtracts one value from another.
+Multiplication * : Multiplies values.
+Division / : Divides one value by another.
+Modulo % : Gives the remainder after division.
+Floor Division // :it gives the whole number part of the division result without the fractional part.
+
+
+
+4.2 Comparison Operators:
+Equal ==: Checks if two values are equal.
+Not Equal !=: Checks if two values are not equal.
+Greater Than > / Less Than<: Checks if one value is greater/less than the other.
+Greater Than or Equal >= / Less Than or Equal <=: Checks if one value is greater/less than or equal to the other.
+
+
+4.3 Logical Operators:
+AND and: Returns True if both conditions are True.
+OR or: Returns True if at least one condition is True.
+NOT not: Reverses the logical state of the operand.
+
+
+4.4 string operations
+len()
+concatenation.
+conversion- upper,lower , ttitle, capitalize
+replace, find
+indexing and slicing

@@ -1,0 +1,263 @@
+Express JS (Back end framework designed for handling easily server level codes)
+--------------------------------------------------------
+
+npm i express
+
+server creation(Launch) :-
+--------------------
+
+Const express = require ('express')
+const app = express()
+const path = require ('path')
+const PORT = process.env.PORT || 3500;
+
+app.use(express.urlencoded({extended:false}))    
+
+app.use(express.json()) 
+
+app.get('^/$|index(.html)?',(req,res)=> {
+	//res.send ('My express server lanuch');  -- simply show the message in the local host 3500
+	res.sendFile(path.join(__dirname,'views','index.html'));  --current foler la views la iruka index page show pana
+})
+
+app.get('/new-page(.html)?',(req,res)=> {
+	res.sendFile(path.join(__dirname,'views','new-page.html'));  --current foler la views la iruka index page show pana
+})
+
+app.get('/old-page(.html)?',(req,res)=> {
+	res.redirect(301,'new-page.html');  -- old page is changed as new page --- so need to redirect and handle the 301 error
+})
+
+app.get('/*',(req,res)=> {
+	res.status(404).sendFile(path.join(__dirname,'views','401.html'));  -- If the page not specify need to call error page
+})
+
+})
+app.listen(PORT,()=> consol.log('server running on port ${PORT}'));
+
+
+Regular expression to control the certain things
+------------------------------------------------
+
+if start / or end / ===> ^/$
+if start / or end / |(or) /index page show ===> '^/$|/index.html'
+if start / or end / |(or) /index page show ===> '^/$|/index(.html)?' -- .html given or not given page will show
+
+app.get('^/$|index(.html)?',(req,res)=> {
+
+	res.sendFile(path.join(__dirname,'views','index.html'));  --current foler la views la iruka index page show pana
+
+app.get('/new-page(.html)?',(req,res)=> {
+	//res.send ('My express server lanuch');  -- simply show the message in the local host 3500
+	res.sendFile(path.join(__dirname,'views','new-page.html'));  --current foler la views la iruka index page show pana
+
+})
+
+
+Next() method:-  we can handle the error path in the different method next is the funcion like if else
+-------------
+
+app.get('/hello.html',(req,res,next)=> {
+	consol.log('hello.html page loading')
+	next(),
+},(req,res)=> {
+	res.send('Hi hello my page for next') 
+	
+   })
+   
+next() method:-  we can hanle next function using array we can respond in chain manner
+-------------
+
+const one=(req,res,next)=> {
+	consol.log('One')
+	next()
+}
+
+const two=(req,res,next)=> {
+	consol.log('two')
+	next()
+}
+
+const three=(req,res,next)=> {
+	consol.log('three')
+	next()
+	res.send('Finished!')
+}
+
+app.get('/chain(.html)?',[one,two,three])
+
+
+Middleware -- Req (midleware) res -- Middleware used between req & res
+---------------
+
+app.use(express.urlencoded({extended:false}))    -- this is built in middleware to receive input from frond end using forms (username,id)
+
+app.use(express.json())   -- this is built in middle ware to use json files (CRUD in json files)
+
+app.use(express.static(path.join(__dirname,'./public',)))  -- static file access to the folder or files.
+
+
+Custom Middleware:   --- Fist will print method (GET), second it will print project path
+--------------------
+
+Const express = require ('express')
+const app = express()
+const path = require ('path')
+const logEvents = require('./middleware/logEvents')    ---> log need to write using logEvents.js
+const PORT = process.env.PORT || 3500;
+
+app.use((req,res,next)  => {
+logEvents('${req.method}\t${req.headers.origin}\t${req.url}')  ---> logEvents.js will create log using uuid from other prog 
+consol.log('$req.mothod','req.path')  
+next()
+})
+
+
+
+Third party Middleware:   --- crosss platform access to your server(website). using from Google
+--------------------
+cross origin resource sharing
+
+npm i cors
+
+
+Const express = require ('express')
+const app = express()
+const path = require ('path')
+const cors = require('cors')
+const logEvents = require('./middleware/logEvents')    ---> log need to write using logEvents.js
+const PORT = process.env.PORT || 3500;
+
+
+app.use(express.urlencoded({extended:false}))    
+app.use(express.json()) 
+
+//cross origin resource sharing
+const whiteList = ['https://www.yoursit.com','http://127.0.0.1:5500']
+	origin: (origin, callback) => {
+	if (whitelit.indexOf(origin) !== -1 ) 
+		{
+			callback(null,true)
+		}
+	else {
+			callback(new Error('Not allowed by CORS'));
+		}
+	},
+	optionsSuccessStatus:200
+	
+app.use(cors())
+
+
+GET 0r Push method if any failure 
+--------------------
+
+app.all('*', (req,res) => {
+	res.status (404);
+	if (req.accepts('html'))
+	  {
+		res.sendFile (path.join(__dirname,'views', '404.html'))
+	  } else if (req.accepts('json')) {
+		res.json({"error": "404 Not Found"});
+	  } else {
+		res.type('txt').send("404 Not Found");
+	   }
+  }
+)
+
+app.use(errorHandler)
+
+
+ROUTER:-  Define the path for good organised structure designing. Folder maintainance and code will be well readable.
+------------
+const app = express()
+const path = require ('path')
+const router = express.Router()
+
+app.get('^/$|index(.html)?',(req,res)=> {
+	res.sendFile(path.join(__dirname,'views','index.html'));  
+})
+
+app.get('/new-page(.html)?',(req,res)=> {
+	res.sendFile(path.join(__dirname,'views','new-page.html'));  
+})
+
+module.exports = router
+
+
+
+API & REST API
+----------------
+Application program interface ---> Third party to access the data clint--> API Request -> validate -> serve the data to the clint if valid.
+
+REST API -- > Representational State Transfer API.
+
+POST  --Create
+GET   --Read
+PUT   --update
+DELETE -- Delete
+
+Example -- > we are reading the json file from the same project in place of Database.
+
+employee.js    --Own Api to retrieve data from file
+-------------
+const app = express()
+const path = require ('path')
+const router = express.Router()
+data{}
+data.employees = require ('../../data/employee.json')   ---data base connection
+
+router.route('/')
+	  .get((req,res)=> {
+			res.json(data.employees)
+	  })
+	  .post((req,res)=> {
+			res.json({
+				"firstname:"req.body.firstname,
+				"lastname:"req.body.lastname
+				})
+	  })
+	  
+	  .put((req,res)=> {
+			res.json({
+				"firstname:"req.body.firstname,
+				"lastname:"req.body.lastname
+				})
+	  .delete((req,res)=> {
+			res.json({
+				"id:"req.body.id
+				})
+				
+router.route('/:id')
+	  .get((req,res)=> {
+			res.json({"id:"req.params.id})
+	  })
+				
+module.exports = router
+
+
+Emp.rest: ---it will give button to send and receive request in locally
+-------------
+
+GET http://localhost:3500/employee
+
+POST  http://localhost:3500/employee
+
+	Content-Type: application/json
+	{
+		"firstname:" "shankar"
+		"lastname:" "Murugesan"
+	}
+
+
+
+MVC --- Framework  -- it will control all the data flow
+--------------------------
+employeeController.js
+
+data{}
+data.employees = require ('../../data/employee.json')   ---data base connection
+
+
+const showallemployee = (req,res)=> {
+			res.json(data.employees)
+	  }

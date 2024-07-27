@@ -1,0 +1,5 @@
+SQL> create table employee (name varchar2(50) , city varchar2(50));
+
+Table created.
+
+SQL>

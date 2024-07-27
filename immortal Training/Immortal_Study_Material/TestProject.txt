@@ -1,0 +1,7 @@
+Project folder create using --- windows & cmd
+cmd > npx create-react-app test -y
+
+cd test
+npm start --- project screen will open
+
+

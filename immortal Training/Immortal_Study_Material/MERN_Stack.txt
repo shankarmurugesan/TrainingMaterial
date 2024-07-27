@@ -1,0 +1,513 @@
+1) how many people end user -- 
+2) Scalable --> login detail --> Mock database   --> digit
+3) secured
+
+MERN, MEAN & AI with ChatGpt prompt
+---------------------------------------------------------------------------------------------------------------
+
+1) Basic          --- will go to college and provide training
+
+   1) HTML       --- CSS
+   2) Javascript --- Async
+   3) React JS or Angular JS    --Front end
+   4) Node JS                   --Back end server
+   5) Mongo DB					--DataBase
+   6) Mongoose or Express JS    --Framework to Access or connect DB & Front end
+   
+	---Installation
+	---Connection   -- All the above VSCode only
+	---CRUD
+	---Simple Page Design
+	---Calculator
+	---BPD
+	---Technical design document
+	---App & web development
+	
+2) Advanced      --- Paid task from the retail in our company -- Stackpos
+3) Pro			 --- Our project -- After 6 month if he is good attitude and knowledge will pay salary and keep them in out company payroll.
+     
+---------------------------------------------------------------------------------------------------------------------
+
+
+MERN
+------
+
+https://www.mongodb.com/try/download/community   -- click on products
+
+
+https://www.mongodb.com/products/self-managed/community-edition  -- download option will come
+
+
+MongoDB Community Server Download   -- download and install
+
+
+---Direct download --- https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-7.0.7-signed.msi	
+
+https://www.mongodb.com/products/tools/compass --compass
+
+
+----mongodb://localhost:27017
+
+npm install express
+npm i mongoose
+
+
+Mongodb:-  Nosql database 
+
+mongoos --- VS codela mongo db connection
+
+show dbs
+
+test> show dbs
+admin   112.00 KiB
+chat     24.00 KiB
+config   72.00 KiB
+local    40.00 KiB
+
+
+CRUD -- create read update delete
+
+create new db 
+
+test>use shandb
+
+
+test> use shandb
+switched to db shandb
+shandb>
+
+
+commands
+---------------
+
+use shandb    ---- my data base
+student -- colletion
+
+schema  -- collection
+table   -- document
+
+Create:
+---------------------
+
+insertOne --- command 
+insertMany --- command 
+db.student show()
+cls
+
+shandb> db.student.insertOne({name: "shankar"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('66094e2bf932c9255b9f990b')
+}
+shandb> db.student.insertOne({name: "vimal"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('66094e44f932c9255b9f990c')
+}
+
+
+-------------------------------------------------------------------
+
+Read:
+-------
+db.student.find()    -- all reacord from the collection
+db.student.limit(2)   -- first two inserted values
+db.student.find().sort({name: 1})   --- 1 asc -1 desc
+db.student.find().sort({name: 1}).limit(2)
+db.student.find().skip(1).limit(2)   -- skip the first line and show next 3 line
+db.student.find({name: "shankar"})
+db.student.find({name: "shankar"},{name: 1},{age: 0})   -- only name ,age dont want to show
+
+
+db.student.find({name:{$eq: "shankar"}})    --equal
+db.student.find({name:{$ne: "shankar"}})    --not equal
+db.student.find({age:{$gt: 25}})
+db.student.find({age:{$gte: 25}})
+db.student.find({age:{$le: 25}})
+db.student.find({age:{$lte: 25}})
+
+db.student.find({age:{$gte: 25,$lte:50},name: "Shankar"})   --- And operation
+db.student.find($or {[age:25,name: "Shankar"]}) --- Or operation
+
+db.student.find({name:[$in: "shankar",'Ramesh']})
+db.student.find({name:[$nin: "shankar",'Ramesh']})
+
+db.student.find({$exp: {$gt:["$debt","$balance"]}})     --- find all the result of debt gt balance
+
+db.student.findOne({$exp: {$gt:["$debt","$balance"]}})     --- find one result
+
+db.student.countDocuments({$exp: {$gt:["$debt","$balance"]}})   --- count
+
+-------------------------------------------------------------------
+
+Update ;-
+------------
+
+db.student.updateOne({age:44},{$set : {age:34} })
+db.student.updateOne({_id:ObjectId('66094e2bf932c9255b9f990b')},{$inc : {age:3} })    ---incremental value age 
+db.student.updateOne({_id:ObjectId('66094e2bf932c9255b9f990b')},{$push : {hobbies: "dancing"} })  -- need to add modify column new value
+db.student.updateOne({_id:ObjectId('66094e2bf932c9255b9f990b')},{$pull : {hobbies: "Drinking"} })  -- need to remove  column  value
+db.student.updateOne({_id:ObjectId('66094e2bf932c9255b9f990b')},{$unset : {age: ""} })   --need to remove column
+
+db.student.updateMany({address: {$exists: true}},{$unset : {address: ""} })   --remove all document address field
+
+db.student.replaceOne({age: 19},{name : "balachandar" })   
+
+--replace the value condition age 19 keep only name 
+and remove all the other column & values
+
+
+-------------------------------------------------------------------
+
+Delete ;-
+------------
+db.student.deleteOne({age:44})
+db.student.deleteMany({age: {$exists: false}})
+
+show dbs
+show collections
+db.dropDatabase()
+
+
+MONGOOSE:-
+--------------------------------------------
+* Mongoose -- Object Data modeling libaray only to the Mongodb.
+* Mongoose is the library.  Its interact mongodb & nodejs. Schema based solution
+* Its overcome some of the difficulties faced in mongo. 
+* it will provide liberary to mongo and connect back end db with JS.
+
+* Runtime programmer other than browser called Node -- Node js will run outside browser using vscode or other tool.
+
+Terminal project commands
+-------------------- 
+
+
+npm init(To create package json) -y(Default yes to all)   
+
+npm i(Install) nodemon -D(Developemnt Dependancy)   
+
+npm i(Install) mongoose     
+
+------------------------------------------------------
+
+Page1 :- Scripts.js ---> we can access the values bcz we connected with DB here
+---------------------------------------------
+
+const mongoose = require('mongoose');
+
+main().catch(err => console.log(err.message));   ---first need to connect db if not it will not proceed further that is meaing of below code
+
+async function main() {
+  await mongoose.connect('mongodb://127.0.0.1:27017/shandb');
+}
+
+
+Page1 :- 2 User.js   ----next page define the shema & value how we want
+---------------------------------------------
+
+const mongoose = require("mongoose")
+
+const userSchema = new mongoose.Schema ({
+    name: String,
+    age: Number
+
+})
+module.exports = mongoose.model("User",userSchema)
+
+userSchema --- 
+const mongoose = require("mongoose")
+const mongoose = require("mongoose")
+
+
+const addressSchema = new mongoose.Schema ({
+        street: String,
+        city: String
+    
+})
+const userSchema = new mongoose.Schema ({
+    name: String,
+    age: {
+        type: Number,
+        min: 10,
+        max: 120,
+        validate :{
+            validator: v => v%2 ===0,
+            message: props => `${props.value} is not an even number`
+        }
+    },
+    email: {
+        type: String,
+        required: true,
+        lowercase: true,
+        maxLength: 30,
+    },
+    createdate: {
+        type: Date,
+        default: Date.now()
+    },
+    chagedate: Date,
+    bestFriend: mongoose.SchemaTypes.ObjectId,
+    hobbies:[String],
+    address: addressSchema
+
+})
+
+module.exports = mongoose.model("User",userSchema)
+
+
+--- system design
+ --- low level
+ --- high level
+ 
+--- Architechture
+    ---project
+
+--- Infrastructure
+
+
+----------------------------------------------NODE ------------------------
+
+1_Installation_Basic_Setup_MERN
+
+-----------------------------------------------------------------------------------------------------------------------------------
+Install below software in your PC
+
+Step 1:
+-------
+
+https://code.visualstudio.com/Download      ---Its popular Tool for developing s/w
+
+https://nodejs.org/en/download/             ---Open source & cross platform.
+                                               Its a Javascript run time environment. 
+                                               Framework to run out side the browser and learn easily.
+											   back end server for creating mobile app / web application
+
+
+Above 2 ---software installation -- Normal -- Next -- Next --- select for installation in you pc.
+
+
+Step 2:
+-------
+
+VSCode:   setup for MERN tech
+-------------    
+
+VSCODE -- software installation -- Normal -- Next -- Next --- select for installation in you pc
+
+Goto to PC search ---> CMD -- right click and open as a administrator 
+
+and type command ---->  code .     --- this will open the vs code
+
+---- Please follow the below steps to install supporting sofware to use MERN full stack
+
+Left side see extension panel and click.  Search the below software to install
+
+Extension --- search the below key word and install
+
+Code Runner    --- Install
+JavaScript Debugger (Nightly)   --- Install
+Code Spell Checker --- Install
+ES7+ React/Redux/React-Native snippets   --- Install
+Express.js FastAPI Backend Snippets   --- Install
+JavaScript (ES6) code snippets --- Install
+Live Server --- Install
+MongoDB for VS Code  --- Install
+Node.js Modules Intellisense      --- Install
+Prettier - Code formatter   --- Install
+vscode-icons   --- Install
+REST Client   --- Install
+
+
+
+Step 2:
+-------
+
+Node JS   ---set up for MERN Tech
+----------------
+
+Create your project folder in your system and open with below steps
+
+1) Go inside the folder
+2) Type cmd command in the search place.
+3) Run the below command for first time
+
+npm install -g create-react-app   ----->    It will download and install the create-react-app package globally on your system, 
+											allowing you to use the create-react-app command from the command line to create new React.
+											js projects anywhere on your machine.
+											
+4) The below command will create the test folder and it will install basic packages for creating mobile app.
+
+npx create-react-app test           ---> create your project folder
+
+cd test 
+npm start
+
+-----------------------------------------------------------------------------------------------------------------------------------
+createReadstream
+createWriteStream
+rs.pipe(ws)
+
+
+fs.existSync   --- directory creation
+fs.mkdir('./new') create dir
+fs.rmdir('./new')  remove dir
+
+
+
+NPM -- Node package Manager
+----------------------------
+
+npm -- third party module prepared by other people
+    -- Node param  --- npmjs.com  -- to identify the package need to use
+	                                 popularity package will be good 
+									 
+
+npm i nodemon -g -- -g golobally to ur system-- Automatic ah code change pana panarun ahuurathuku 
+
+nodeman -v
+
+nodeman <filename>
+
+npm init -y -- this will use to install all jason & index page for start project.
+
+npm install -- used to install jason file defined package automatically install
+
+npm i date-fns   --- prod deployment dependancy need to create
+
+npm update --- update the package with in the project
+
+npm i uuid --- 9.0.0   -> 9 Major , 0 minor , 0 patch
+
+.gitignore   -- folder name need to define here to upload b4 cratiing prjt
+
+node_modules
+
+
+----------
+
+existSync   -- dir iruka illay pathu if la check panitu dir creaet pandrathuku
+
+myEmitter -- object
+
+
+
+system level design
+
+
+Express JS (Back end framework designed for handling easily server level codes)
+--------------------------------------------------------
+
+npm i express
+
+server creation(Launch) :-
+--------------------
+
+Const express = require ('express')
+const app = express()
+const path = require ('path')
+const PORT = process.env.PORT || 3500;
+
+app.use(express.urlencoded({extended:false}))    
+
+app.use(express.json()) 
+
+app.get('^/$|index(.html)?',(req,res)=> {
+	//res.send ('My express server lanuch');  -- simply show the message in the local host 3500
+	res.sendFile(path.join(__dirname,'views','index.html'));  --current foler la views la iruka index page show pana
+})
+
+app.get('/new-page(.html)?',(req,res)=> {
+	res.sendFile(path.join(__dirname,'views','new-page.html'));  --current foler la views la iruka index page show pana
+})
+
+app.get('/old-page(.html)?',(req,res)=> {
+	res.redirect(301,'new-page.html');  -- old page is changed as new page --- so need to redirect and handle the 301 error
+})
+
+app.get('/*',(req,res)=> {
+	res.status(404).sendFile(path.join(__dirname,'views','401.html'));  -- If the page not specify need to call error page
+})
+
+})
+app.listen(PORT,()=> consol.log('server running on port ${PORT}'));
+
+
+Regular expression to control the certain things
+------------------------------------------------
+
+if start / or end / ===> ^/$
+if start / or end / |(or) /index page show ===> '^/$|/index.html'
+if start / or end / |(or) /index page show ===> '^/$|/index(.html)?' -- .html given or not given page will show
+
+app.get('^/$|index(.html)?',(req,res)=> {
+
+	res.sendFile(path.join(__dirname,'views','index.html'));  --current foler la views la iruka index page show pana
+
+app.get('/new-page(.html)?',(req,res)=> {
+	//res.send ('My express server lanuch');  -- simply show the message in the local host 3500
+	res.sendFile(path.join(__dirname,'views','new-page.html'));  --current foler la views la iruka index page show pana
+
+})
+
+
+Next() method:-  we can handle the error path in the different method next is the funcion like if else
+-------------
+
+app.get('/hello.html',(req,res,next)=> {
+	consol.log('hello.html page loading')
+	next(),
+},(req,res)=> {
+	res.send('Hi hello my page for next') 
+	
+   })
+   
+next() method:-  we can hanle next function using array we can respond in chain manner
+-------------
+
+const one=(req,res,next)=> {
+	consol.log('One')
+	next()
+}
+
+const two=(req,res,next)=> {
+	consol.log('two')
+	next()
+}
+
+const three=(req,res,next)=> {
+	consol.log('three')
+	next()
+	res.send('Finished!')
+}
+
+app.get('/chain(.html)?',[one,two,three])
+
+
+Middleware -- Req (midleware) res -- Middleware used between req & res
+---------------
+
+app.use(express.urlencoded({extended:false}))    -- this is built in middleware to receive input from frond end using forms (username,id)
+
+app.use(express.json())   -- this is built in middle ware to use json files (CRUD in json files)
+
+app.use(express.static(path.join(__dirname,'./public',)))  -- static file access to the folder or files.
+
+Custom Middleware:   --- Fist will print method (GET), second it will print project path
+--------------------
+
+app.use((req,res,next)  => {
+consol.log('$req.mothod','req.path')  
+next()
+})
+
+
+---
+
+Oracle Enterprise Manager Database Express URL: https://localhost:5500/em
+
+
+https://localhost:5500/em
+
+
+Naveen Kumar
+

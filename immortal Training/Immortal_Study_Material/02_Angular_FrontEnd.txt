@@ -1,0 +1,232 @@
+Angular:-
+
+https://angular.io/quick-start
+
+A few lines of TypeScript are all it takes to create your first Angular app. 
+As your app grows, you can separate the markup and code into different files.
+
+
+create your own folder 
+
+check version it should be 8.5 and above
+
+npm --version
+
+
+npm init @angular myApp
+
+
+cd myApp
+
+
+npm start
+
+----------------
+npm install -g @angular/cli
+
+ng -- command use pana mudiyathu
+
+set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned  --- not working in my pc
+
+
+---Components
+
+upto above folder structure will be created
+
+in the folder structure app folder under we change the below files and see the output
+
+app.component.ts  -- type script writing file to get and send data
+app.component.htm   -- HTML file to show the output
+
+One way binding -- One side only can able to change the data ---  only response showing 
+
+two way binding -- two way can able to change the data --- [(ngmodel)] -- need to import forms in the component
+
+string interpolation -- view--> {{expression}} -- using this syntax to provide any kind of data as output directly
+------------------
+TS file 
+-------------
+
+export class AppComponent {
+title = "Hello world";
+}
+
+getName(){
+ return "Shankar M";
+}
+
+htm file
+-------------
+{{title}}
+{{getName()}}
+
+<h1> {{title}} </h1>
+<h2> {{getName()}} </h2>
+
+property binding --> DOM property in HTML W3 school
+----------------------------------------------------------
+
+<h1 [inner text]="title">  </h1>
+<button [disabled]="isDisabled"> click me! </button>
+
+TS file 
+-------------
+
+export class AppComponent {
+title = "Hello world";
+}
+
+htm file
+-------------
+<h1 [inner text]="title" > </h1>
+
+
+Event binding --> Hardware Mouse & keyboard action -- > click ,mouse hover,keypress
+----------------------------------------------------------
+onSave() -- TS file 
+
+<button (click)="onSave()"> Save! </button>
+
+TS file 
+-------------
+
+export class AppComponent {
+clickCount = 0;
+
+clickMe() {
+	this.clickCount ++;
+	}
+}
+
+htm file
+-------------
+<h1> clicked {{clickCount}} times </h1>
+<button (click)="ClickMe()"> Click me! </button>
+
+
+Simple counter Project --> cmd -- create new project in the same folder 
+----------------------------------------------------------
+
+ng new counter-app
+
+after creation open in vs code
+
+ng generate component counter
+
+src - app - counter -- Component will be created in the folder structure
+
+component.js file la import [RouterOutlet,counterComponent ]
+
+
+TS file 
+-------------
+
+export class CounterComponent {
+Count = 0;
+
+Increment() {
+	this.Count++;
+	}
+}
+
+Decrement() {
+
+	if (this.count > 0) {
+		this.Count--;
+	}
+}
+
+htm file
+-------------
+<h1> Count: {{clickCount}}  </h1>
+<button (click)="Increment()"> Plus + </button>
+<button (click)="Decrement()"> Minus - </button>
+
+
+directives
+------------------------
+
+Component Directive
+Structural Directive
+Attribute Directive
+
+
+Structural Directive
+------------------------
+commonModule  --- need to be imported in the app.component.ts 
+
+
+ngfor Exampl
+------------------
+TS file 
+-------------
+
+export class AppComponent {
+	myFamily = [
+		'Shankar ',
+		'Punitha',
+		'Aarunya',
+		'Aarundhran'
+	]
+
+}
+
+
+htm file
+-------------
+<h1> Ng for Example </h1>
+<u1> 
+	<li *ngFor= "family of mine" >{{myFamily}} </li>
+</u1>
+
+
+ngif  Example  -- true or fale if condition
+------------------
+
+TS file 
+-------------
+
+export class AppComponent {
+	showMe = "false";
+
+}
+
+htm file
+-------------
+<h1 *ngIf= "ShowMe"> Can u see me </h1>
+
+
+Attibute Directive  -- Changes, apperance and behaviour
+------------------------
+ngClass
+
+
+CSS file 
+-------------
+.primay {
+	color:red
+}
+
+.big {
+	font-size: 40px;
+}
+
+htm file
+-------------
+<p [ngClass]= "['primary','big']"> Sample Text </p>
+
+
+Attibute Directive  -- Changes, apperance and behaviour
+------------------------
+ngStyle
+
+
+CSS file 
+-------------
+
+
+htm file
+-------------
+<p [ngStyle]= "{'Color':'red','font-size' : 'big'}"> Sample Text </p>
+
+

@@ -1,0 +1,113 @@
+6. Data Structures
+A data structure in programming is like a specific way to organize and store data so that it can be efficiently used, managed, and accessed.
+
+List
+Tuples
+Set
+Dictionary
+
+
+6.1 List
+Brackets - [ ]
+Collection of Elements
+Mutable
+Multiple data types
+Allows duplicates
+Index-Based Access
+
+
+
+6.2 Tuple
+Brackets - ( )
+Collection of Elements
+Immutable
+Multiple data types
+Allows duplicates
+Index-Based Access
+
+
+6.3 set
+brackets - {}
+Unordered
+Unchangeable
+duplicate values not allowed
+data access not possible
+
+
+basic set opertaions:
+Union (|): Combines unique elements from both sets.
+
+Intersection (&): Finds common elements between sets.
+
+Difference (-): Finds elements in the first set but not in the second.
+
+Symmetric Difference (^): Finds elements in either set, but not in both.
+
+Subset (<=): Checks if one set is a subset of another.
+
+Superset (>=): Checks if one set is a superset of another.
+
+
+
+
+6.4 Dictionary
+A dictionary in Python is a data structure that stores a collection of data as key-value pairs.
+
+Structure of a Dictionary:
+Keys: Unique identifiers within the dictionary, like words in a real dictionary.
+
+Values: Corresponding to each key, these hold the associated information or data.
+
+brackets - {}
+Unordered
+duplicate keys not allowed
+data access not possible
+
+
+
+Conditional statements
+Conditional statements in Python are used to execute different code blocks based on specified conditions.
+
+There are mainly three types of conditional statements:
+
+if
+elif (short for "else if")
+else.
+
+
+
+a)If Statement:
+Executes a block of code if a condition is true.
+
+b)If-Else Statement:
+Executes one block of code if the condition is true and another block if the condition is false.
+
+c)If-Elif-Else Statement:
+Allows checking multiple conditions and executing different blocks based on them.
+
+
+Nested Conditional Statements:
+Using conditional statements within each other to check more complex conditions.
+
+
+loops
+Loops in programming allow you to execute a block of code repeatedly. There are mainly two types of loops in Python:
+
+for loops
+while loops.
+Loop Control Statements:
+
+break: Terminates the loop prematurely based on a condition.
+
+continue: Skips the current iteration and moves to the next one.
+
+
+
+(a) for loop
+For loops are used for iterating over a sequence (such as lists, tuples, strings, or other iterable objects) and executing a block of code for each element in the sequence.
+
+
+(b) While Loops
+While loops continue executing a block of code as long as a specified condition is true.
+
+split()
